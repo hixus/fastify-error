@@ -1,8 +1,9 @@
-import createError, { FastifyError, ValidationResult } from './'
+import createError, { FastifyErrorConstructor, ValidationResult } from './'
 import { expectType } from 'tsd'
 
-const error = createError('CODE', 'message')
-expectType<FastifyError>(error)
+const errorConstructor = createError('CODE', 'message')
+const error = new errorConstructor()
+expectType<FastifyErrorConstructor>(errorConstructor)
 expectType<string>(error.code)
 expectType<string>(error.message)
 expectType<number>(error.statusCode!)
